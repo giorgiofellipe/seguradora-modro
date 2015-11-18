@@ -21,5 +21,9 @@ INSERT INTO "public".faderim_router (router_name, page_name, router_title, route
 	VALUES ('seg_usuario_delete', 'seguradora_login', 'Excluir Usuário', 'Seguradora::Controller::Form::UsuarioFormController.delete', NULL);
 INSERT INTO "public".faderim_router (router_name, page_name, router_title, router_controller, router_path) 
 	VALUES ('seg_logout', 'seguradora_login', 'Logout', 'Seguradora::Controller::LoginController.logout', '/logout');
+/* usuário de desenvolvimento */
+INSERT INTO "public".usuario (usu_id, usu_nome, usu_senha, usu_login) 
+	VALUES (1, 'Administrador', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'seguradora@admin.com.br');
+
 
 
