@@ -10,3 +10,4 @@ Plugin de Gerenciamento de Projetos integrado ao GitHub - https://www.zenhub.io/
 - Configurar documentroot para diretório "seguradora"
 - Gerar tabelas através do doctrine
 - Executar os scripts existentes no arquivo "script_sql.sql"
+- Baixar as dependências via composer
