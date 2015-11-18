@@ -1,0 +1,19 @@
+date:
+  timezone: America/Sao_Paulo
+doctrine:
+  debug: true
+  proxy-dir: false
+  auto-genarate-proxy: false
+  source-folders: 
+    - src
+  driver: pdo_pgsql
+  user: postgres
+  password: 123456
+  host: 127.0.0.1
+  dbname: seguradora
+  charset: utf8
+twig:
+  cache: false
+  autoescape: false  
+  auto_reload: true
+  debug: true

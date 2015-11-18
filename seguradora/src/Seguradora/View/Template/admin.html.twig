@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">        
+        <link rel="stylesheet" type="text/css" href="{{ web_path('ext-4.2.1/resources/css/ext-all-neptune.css') }}">               
+        <link rel="stylesheet" type="text/css" href="{{ web_path('css/admin.css') }}">
+        <script type="text/javascript" src="{{ web_path('ext-4.2.1/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ web_path('ext-4.2.1/locale/ext-lang-pt_BR.js') }}" ></script>
+        <script type="text/javascript" src="{{ web_path('faderim/faderim-ext.js') }}" ></script>
+        <title>{%block titulo %}{{app.router.title}}{%endblock %}</title>
+        <style type="text/css">
+
+            .x-body {
+                background-color: white;
+            }
+            .x-form-text {
+                border-color:#999999;
+            }            
+            .x-form-focus {
+                border-color:#4285f4;
+            }
+            .x-form-field[readonly="readonly"] {
+                background-color: #e7e7e7;
+                color: #777777;
+            }
+            .x-btn-focus,
+            .x-btn-over {
+
+            }       
+            .x-mask {
+                background-color:black;
+                opacity:0.2;
+            }   
+
+            .grid-header-action {
+                background-color: #f6f6f6;
+            }
+            .grid-header-filter {
+                background-color:#e7e7e7;
+            }
+            .row-image-small {
+                height:70px;                
+            }
+            .row-invalid {
+                color:red;
+            }
+            .row-disabled {
+                color: #999999;
+            }
+        </style>
+        <script type="text/javascript">
+
+            Ext.require(['*']);
+            var MagazordIcons = {
+                'mz_marca_list': 'group_gear'
+            };
+
+            function collapseMenu() {
+                var areaLateral = Ext.getCmp('area-lateral');
+                if (areaLateral.hasCls('menu-collapsed')) {
+                    areaLateral.setWidth(200);
+                    areaLateral.removeCls('menu-collapsed');
+                }
+                else {
+                    areaLateral.addCls('menu-collapsed');
+                    areaLateral.setWidth(37);
+                }
+            }
+
+            function itemMenuToogle(div) {
+                var parent = Ext.get(div.parentNode);
+                if (parent.hasCls('item-list-expanded')) {
+                    parent.removeCls('item-list-expanded');
+                }
+                else {
+                    parent.addCls('item-list-expanded');
+                }
+            }
+
+            Ext.onReady(function() {
+                Ext.create('Ext.Viewport', {
+                    id: 'border-example',
+                    layout: 'border',
+                    padding: '0',
+                    items: [
+                        Ext.create('Ext.Component', {
+                            region: 'north',
+                            id: 'teste2',
+                            baseCls: 'area-superior',
+                            contentEl: 'area-superior',
+                            height: 50
+                        }), {
+                            region: 'west',
+                            name: 'menu-lateral',
+                            id: 'area-lateral',
+                            width: 200,
+                            height: '100%',
+                            contentEl: 'area-menu',
+                            baseCls: 'menu-lateral'
+                        },
+                        {
+                            region: 'south',
+                            id: 'teste3',                            
+                            height: 80,
+                            contentEl: 'area-inferior',
+                            baseCls: 'area-inferior'
+                        },                        
+                        
+                        tabs = Ext.create('Ext.tab.Panel', {
+                            region: 'center',
+                            deferredRender: true,
+                            plain: true,
+                            bodyBorder: false,
+                            border: false,
+                            margin: '10 0 0 7',
+                            listeners: {
+                                beforeadd: function(tab, comp) {
+                                    var icon = MagazordIcons[comp.routerName];
+                                    comp.icon = Faderim.Util.icon(icon);
+                                }
+                            },
+                            id: 'tab-admin-container',
+                            items: []
+                        })]
+                });
+            });
+
+            Faderim.AjaxRouter.defineBeforeComponentCallback('tabs', function(config) {
+                var router = config.router;
+                var items = tabs.query('> [routerName="' + router + '"]');
+                if (items.length > 0) {
+                    tabs.setActiveTab(items[0]);
+                    return false;
+                }
+            });
+
+            Faderim.AjaxRouter.defineComponentCallback('tabs', function(component) {
+                component.closable = true;
+                component.windowContainer = true;
+                tabs.add(component);
+                tabs.setActiveTab(component);
+            });
+            Faderim.AjaxRouter.defineComponentCallback('hide', function(component, options) {
+                Faderim.Action.parseResult(component, null, component.caller);
+            });
+            Ext.override(Ext.grid.column.Boolean, {
+                trueText: 'Sim',
+                falseText: 'Não',
+                inputValue: 1
+            });
+
+            Faderim.AjaxRouter.defineComponentCallback('window', function(component, options) {
+                var title = component.title;
+                component.header = false;
+                var windowConfig = {
+                    icon: Faderim.Util.baseIconUrl + 'application_form.png',
+                    items: [
+                        component
+                    ],
+                    target: this,
+                    layout: 'fit',
+                    collapsible: true,
+                    autoScroll: true,
+                    title: title,
+                    listeners: {
+                        show: function() {
+                            if (options.maskTarget && options.maskTarget.getEl && options.maskTarget.getEl()) {
+                                options.maskTarget.getEl().mask();
+                            }
+                        },
+                        close: function() {
+                            if (options.maskTarget && options.maskTarget.getEl && options.maskTarget.getEl()) {
+                                options.maskTarget.getEl().unmask();
+                            }
+                        }
+                    }
+                };
+                if (!component.width) {
+                    windowConfig['width'] = 600;
+                }
+                var win = new Ext.Window(windowConfig);
+                if (options.renderTo) {
+                    options.renderTo.add(win).show();
+                }
+                else if (options.caller) {
+                    options.caller.add(win).show();
+                }
+                else {
+                    win.show();
+                }
+            });
+            function openRouterAsTab(routerName) {
+                Ext.create('Faderim.AjaxRouter', {
+                    method: 'POST',
+                    router: routerName,
+                    maskTarget: Ext.getBody(),
+                    target: 'tabs'
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="area-superior">
+            <div>                
+                <span class="maga-title">&nbsp;&nbsp;Seguradora Modro</span>                                
+                <div class="area-avatar">
+                    <span class="avatar-nome">{{usuario.nome}}<a href="{{web_router('seg_logout')}}">Sair</a><br/>                        
+                    </span>
+                    <span class="imagem-usuario"><img width="32" src="{{web_path('image/default-profile.jpg')}}" /></span>
+                </div>
+            </div>            
+        </div>
+        <div id="area-menu">
+            <ul class="lista-menu">
+                {% for key,item in menu_itens %}
+                    <li {% if item.router is defined %} onclick="openRouterAsTab('{{item.router}}');" {% endif %} title="{{item.nome}}">
+                        <div class="item-menu-out" {% if item.childs is defined %} onclick="itemMenuToogle(this);" {% endif %} >
+                            <span class="menu-icon">
+                                <span class="menu-icon-{{key}}"></span>                                
+                            </span>
+                            <span class="menu-text">{{item.nome}}</span>                            
+                            {% if item.childs is defined %}
+                                <span class="menu-expander">+</span>
+                            {% endif %}
+                        </div>
+                        {% if item.childs is defined %}
+                            <ul>
+                                {% for key_child,item_child in item.childs %}
+                                    <li onclick="openRouterAsTab('{{item_child.router}}');" title="{{item_child.nome}}">
+                                        <div class="item-menu-in">                        
+                                            <span class="menu-icon">
+                                                <span class="menu-icon-{{key_child}}"></span>                                
+                                            </span>
+                                            <span class="menu-text">{{item_child.nome}}</span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>                        
+                        {% endif %}
+                    </li>                    
+                {% endfor %}        
+            </ul>
+            <div class="menu-collapse-area" onclick="collapseMenu();"></div>            
+        </div>        
+        <div id="area-inferior" style="background-color: black;color:white;font-size: 15px;height: 100%;">            
+            <div style="float: left;width: 30%;padding: 10px;">                
+                <span>Universidade do Estado de Santa Catarina - UDESC</span><br />
+                <span>Centro de Educação do Alto Vale do Itajaí - CEAVI</span><br />
+                <span>Especialização em Engenharia de Software</span><br />                                
+            </div>
+            <div style="padding: 10px;">                
+                <span>Equipe</span><br />
+                <span>Professor: ...</span><br />                                
+            </div>
+        </div>
+    </body>
+</html>

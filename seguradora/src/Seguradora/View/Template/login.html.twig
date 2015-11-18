@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>{%block titulo %}{{app.router.title}}{%endblock %}</title>
+        <link href="/css/login.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="maga-login">
+            <div style="text-align:center">
+                SEGURADORA<br />                
+                Login: seguradora@admin.com.br<br />
+                Senha: 1234
+            </div>     
+            <div class="maga-login-fields">
+                <form method="POST">
+                    <input type="email" name="email" placeholder="E-mail" autocomplete="on" value="seguradora@admin.com.br" />        
+                    <input type="password" name="password" placeholder="Senha" value="1234" />                                
+                    {% if erro is defined %}
+                        <p>{{erro}}</p>
+                    {% endif %}
+                    <input type="submit" style="margin-top:20px" class="submit" value="Fazer Login" />                
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

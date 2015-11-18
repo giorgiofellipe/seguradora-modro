@@ -1,0 +1,227 @@
+{% extends 'Faderim::Framework::html_default' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ web_path('ext/resources/css/ext-all-gray.css') }}">
+
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ web_path('ext/bootstrap.js') }}"></script>
+<script type="text/javascript" src="{{ web_path('ext/locale/ext-lang-pt_BR.js') }}" ></script>
+<script type="text/javascript">
+
+    function submitTela(a, b, c) {
+        var form = this.up('form').getForm();
+        if (form.isValid()) {
+            var myMask = new Ext.LoadMask(Ext.getBody(), {msg: "Please wait..."});
+            myMask.show();
+            form.submit({
+                clientValidation: true,
+                method: 'POST',
+                url: '?router=ponto_setor_relatorio',
+                success: function(form, action) {
+                    myMask.destroy();
+                },
+                failure: function(form, action) {
+                    myMask.destroy();
+                }
+            });
+            //Ext.Msg.alert('Submitted Values', form.getValues(true));
+        }
+    }
+
+    function abreGerenciamentoFuncionario() {
+        var grid = this.up('grid');
+        //console.log(grid);
+
+        var selection = grid.getSelectionModel().getSelection()[0];
+        if (selection) {
+            loadRouterAsTab("ponto_setor_gerenciar_funcionario", selection.data);
+
+            console.log(selection);
+        }
+        else {
+            Ext.Msg.alert('Alerta', 'Selecione um registro para poder editar');
+        }
+    }
+
+    function clickArvore(tree, rec) {
+        var sNodeId = rec.get('id');
+        if (isNaN(sNodeId)) {
+            loadRouterAsTab(sNodeId);
+        }
+    }
+    function renderCalculaSaldoMes(val) {
+        return '<b>' + val + ' horas</b>';
+    }
+    function calculaSaldoMes(records)
+    {
+        var i = 0,
+                length = records.length,
+                total = "00:00",
+                record;
+
+        for (; i < length; ++i) {
+            record = records[i];
+            var saldo = calculaSaldoLinha(record);
+            if (saldo) {
+                total = somaHora(saldo, total);
+            }
+        }
+        return diferencaHoras('183:45', total);
+        //'183:45'
+        return total;
+    }
+
+    function loadRouterAsTab(sRouterName, params) {
+        params = params || {};
+        var myMask = new Ext.LoadMask(Ext.getBody(), {msg: "Please wait..."});
+        //myMask.show();
+        Ext.create('Ext.ComponentLoader', {
+            url: '?router=' + sRouterName,
+            params: params,
+            method: 'GET',
+            target: Ext.getCmp('tab_menu'),
+            renderer: "component",
+            callback: function(a, b, c, d, e) {
+                //myMask.destroy();
+            },
+            "autoLoad": true
+        });
+    }
+
+
+    function diferencaHoras(horaInicial, horaFinal) {
+        var negativo = false;
+        if (!isHoraInicialMenorHoraFinal(horaInicial, horaFinal)) {
+            negativo = true;
+            var aux = horaFinal;
+            horaFinal = horaInicial;
+            horaInicial = aux;
+        }
+
+        var hIni = horaInicial.split(':');
+        var hFim = horaFinal.split(':');
+
+        var horasTotal = parseInt(hFim[0], 10) - parseInt(hIni[0], 10);
+        var minutosTotal = parseInt(hFim[1], 10) - parseInt(hIni[1], 10);
+
+        if (minutosTotal < 0) {
+            minutosTotal += 60;
+            horasTotal -= 1;
+        }
+        horaFinal = completaZeroEsquerda(horasTotal) + ":" + completaZeroEsquerda(minutosTotal);
+        return (negativo ? "-" + horaFinal : horaFinal);
+        return horaFinal;
+    }
+
+    function isHoraInicialMenorHoraFinal(horaInicial, horaFinal) {
+        var horaIni = horaInicial.split(':');
+        var horaFim = horaFinal.split(':');
+
+        // Verifica as horas. Se forem diferentes, é só ver se a inicial
+        // é menor que a final.
+        var hIni = parseInt(horaIni[0], 10);
+        var hFim = parseInt(horaFim[0], 10);
+        if (hIni != hFim)
+            return hIni < hFim;
+        // Se as horas são iguais, verifica os minutos então.
+        var mIni = parseInt(horaIni[1], 10);
+        var mFim = parseInt(horaFim[1], 10);
+        if (mIni != mFim)
+            return mIni < mFim;
+    }
+
+    function somaHora(horaInicio, horaSomada) {
+        var horaIni = horaInicio.split(':');
+        var horaSom = horaSomada.split(':');
+        var horasTotal = parseInt(horaIni[0], 10) + parseInt(horaSom[0], 10);
+        var minutosTotal = parseInt(horaIni[1], 10) + parseInt(horaSom[1], 10);
+        if (minutosTotal >= 60) {
+            minutosTotal -= 60;
+            horasTotal += 1;
+        }
+        return completaZeroEsquerda(horasTotal) + ":" + completaZeroEsquerda(minutosTotal);
+    }
+
+    Date.prototype.getHoraAsString = function() {
+        return this.getHours() + ':' + this.getMinutes();
+    };
+    function completaZeroEsquerda(numero) {
+        if (numero < 0) {
+            if (numero > -9) {
+                return "-0" + numero * -1;
+            }
+            else {
+                return "-" + numero * -1;
+            }
+        }
+        return (numero < 10 ? "0" + numero : numero);
+    }
+
+    function calculaSaldoLinha(record) {
+        var numBatidas = [];
+        while (true) {
+            var has = record.get('batida' + (numBatidas.length + 1));
+            if (has) {
+                numBatidas.push(has);
+            }
+            else {
+                break;
+            }
+        }
+        if ((numBatidas.length % 2) == 0) {
+            var saldo = [];
+            for (var i = 0; i < numBatidas.length; i++) {
+                var batida1 = new Date(numBatidas[i]);
+                var batida2 = new Date(numBatidas[i + 1]);
+                i++;
+                saldo.push(diferencaHoras(batida1.getHoraAsString(), batida2.getHoraAsString()));
+            }
+
+
+            if (saldo.length > 0) {
+                return diferencaHoras('08:45', saldo.reduce(function(a, b) {
+                    return somaHora(a, b);
+                }));
+            }
+            else {
+                return '00:00';
+            }
+
+        }
+        return null;
+    }
+
+    function teste(a, b, record) {
+        return calculaSaldoLinha(record);
+    }
+    Ext.require(['*']);
+    Ext.util.Observable.observe(Ext.data.Connection);
+    Ext.data.Connection.on('requestexception', function(dataconn, response, options) {
+        if (response.responseText !== null) {
+            var sExcept = response.getResponseHeader('Faderim-Exception');
+            if (!sExcept) {
+                sExcept = response.responseText;
+            }
+            else {
+                sExcept = JSON.parse(sExcept);
+            }
+            Ext.MessageBox.show({
+                title: 'Faderim Error',
+                msg: sExcept,
+                buttons: Ext.MessageBox.OK,
+                icon: Ext.MessageBox.ERROR
+            });
+        }
+    });
+    Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
+    Ext.onReady(function() {
+        var a = {{viewport}};
+        alert(a);
+    });
+    </script>
+
+{%endblock%}
+{% block body %}
+    <body></body>
+{% endblock %}

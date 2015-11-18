@@ -1,0 +1,25 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "*",
+        "phpmd/phpmd": "*"
+    },
+    "require": {
+        "doctrine/dbal": "*",
+        "doctrine/orm": "*",
+        "symfony/yaml": "*",
+        "twig/twig": "*",
+        "justinrainbow/json-schema": "*",
+        "monolog/monolog": "1.8.0",
+        "phpoffice/phpexcel": "dev-develop",
+        "league/flysystem": "0.3.*",        
+        "imagine/imagine": "*",
+        "beberlei/assert": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Faderim": "src/Faderim/",
+            "": "src/"
+        }
+    }
+}

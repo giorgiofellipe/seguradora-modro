@@ -1,0 +1,407 @@
+/* 
+    Created on : 20/05/2014, 11:37:31
+    Author     : Ricardo Schroeder <ricardo@magamobi.com.br>
+*/
+@-webkit-keyframes shake {
+  /* line 3, ../sass/admin.scss */
+  0% {
+    -webkit-transform: translate(2px, 1px) rotate(0deg);
+  }
+
+  /* line 4, ../sass/admin.scss */
+  10% {
+    -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  /* line 5, ../sass/admin.scss */
+  20% {
+    -webkit-transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  /* line 6, ../sass/admin.scss */
+  30% {
+    -webkit-transform: translate(0px, 2px) rotate(0deg);
+  }
+
+  /* line 7, ../sass/admin.scss */
+  40% {
+    -webkit-transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  /* line 8, ../sass/admin.scss */
+  50% {
+    -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  /* line 9, ../sass/admin.scss */
+  60% {
+    -webkit-transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  /* line 10, ../sass/admin.scss */
+  70% {
+    -webkit-transform: translate(2px, 1px) rotate(-1deg);
+  }
+
+  /* line 11, ../sass/admin.scss */
+  80% {
+    -webkit-transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  /* line 12, ../sass/admin.scss */
+  90% {
+    -webkit-transform: translate(2px, 2px) rotate(0deg);
+  }
+
+  /* line 13, ../sass/admin.scss */
+  100% {
+    -webkit-transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+/* line 19, ../sass/admin.scss */
+.shake {
+  display: inline-block;
+}
+
+/* line 22, ../sass/admin.scss */
+.area-superior {
+  background: #444;
+  padding: 0 10px 0 10px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #444444), color-stop(100%, #222222));
+  background-image: -webkit-linear-gradient(#444444, #222222);
+  background-image: -moz-linear-gradient(#444444, #222222);
+  background-image: -o-linear-gradient(#444444, #222222);
+  background-image: linear-gradient(#444444, #222222);
+}
+/* line 26, ../sass/admin.scss */
+.area-superior .maga-title {
+  font-size: 2.0em;
+  color: white;
+  vertical-align: top;
+  margin-top: 10px;
+  display: inline-block;
+  text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px;
+}
+/* line 35, ../sass/admin.scss */
+.area-superior .maga-search {
+  margin: 0px 30px 30px 30px;
+}
+/* line 37, ../sass/admin.scss */
+.area-superior .maga-search input {
+  height: 30px;
+  width: 400px;
+  margin-top: 10px;
+  vertical-align: top;
+}
+/* line 44, ../sass/admin.scss */
+.area-superior .area-avatar {
+  float: right;
+  color: white;
+}
+/* line 47, ../sass/admin.scss */
+.area-superior .area-avatar .imagem-usuario {
+  float: right;
+  border-radius: 32px;
+  height: 32px;
+  width: 32px;
+  margin: 9px 0 0 0;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+}
+/* line 57, ../sass/admin.scss */
+.area-superior .area-avatar .avatar-nome {
+  vertical-align: top;
+  float: right;
+  margin: 10px 5px 0px 5px;
+}
+/* line 61, ../sass/admin.scss */
+.area-superior .area-avatar .avatar-nome a {
+  color: white;
+  margin-left: 5px;
+}
+/* line 66, ../sass/admin.scss */
+.area-superior .area-avatar .avatar-ultimo-acesso {
+  font-size: 7pt;
+}
+
+/* line 72, ../sass/admin.scss */
+.menu-lateral {
+  background-color: #f6f6f6;
+  border-right: 1px solid #c9c9c9;
+  color: #777777;
+}
+
+/* line 79, ../sass/admin.scss */
+#area-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 84, ../sass/admin.scss */
+#area-menu ul .item-menu-in,
+#area-menu ul .item-menu-out {
+  cursor: pointer;
+}
+/* line 88, ../sass/admin.scss */
+#area-menu ul .item-menu-out:hover {
+  background-color: #e7e7e7;
+}
+/* line 92, ../sass/admin.scss */
+#area-menu ul .item-menu-out .menu-text {
+  line-height: 34px;
+}
+/* line 95, ../sass/admin.scss */
+#area-menu ul .item-menu-in .menu-text {
+  line-height: 25px;
+}
+/* line 99, ../sass/admin.scss */
+#area-menu ul .menu-text {
+  display: inline-table;
+  vertical-align: top;
+  padding-left: 2px;
+  width: 140px;
+}
+/* line 104, ../sass/admin.scss */
+.menu-collapsed #area-menu ul .menu-text {
+  display: none !important;
+}
+/* line 109, ../sass/admin.scss */
+#area-menu .lista-menu {
+  margin-top: 30px;
+  border-top: 1px solid #c9c9c9;
+}
+/* line 112, ../sass/admin.scss */
+#area-menu .lista-menu ul {
+  border-bottom: 1px solid #c9c9c9;
+  display: none;
+}
+/* line 116, ../sass/admin.scss */
+#area-menu .lista-menu .item-list-expanded ul {
+  display: block;
+}
+/* line 119, ../sass/admin.scss */
+#area-menu .lista-menu > li > div {
+  height: 35px;
+  border-bottom: 1px solid #c9c9c9;
+}
+/* line 124, ../sass/admin.scss */
+#area-menu .lista-menu .item-menu-in:hover,
+#area-menu .lista-menu .item-menu-out:hover .menu-icon {
+  background-color: #a1c037;
+}
+/* line 128, ../sass/admin.scss */
+#area-menu .lista-menu .item-menu-in:hover .menu-icon span,
+#area-menu .lista-menu .item-menu-out:hover .menu-icon span {
+  -webkit-animation-name: shake;
+  -webkit-animation-duration: 0.8s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+/* line 137, ../sass/admin.scss */
+#area-menu .lista-menu .item-menu-in .menu-icon span {
+  width: 16px;
+  height: 16px;
+  display: inline-table;
+  margin: 5px 0 0 27px;
+}
+/* line 142, ../sass/admin.scss */
+.menu-collapsed #area-menu .lista-menu .item-menu-in .menu-icon span {
+  margin-left: 18px;
+}
+/* line 148, ../sass/admin.scss */
+#area-menu .lista-menu .item-menu-out .menu-icon {
+  width: 36px;
+  height: 34px;
+  border-right: 1px solid #c9c9c9;
+  display: inline-table;
+}
+/* line 153, ../sass/admin.scss */
+#area-menu .lista-menu .item-menu-out .menu-icon span {
+  width: 24px;
+  height: 24px;
+  display: inline-table;
+  margin: 5px 0 0 5px;
+}
+/* line 159, ../sass/admin.scss */
+.menu-collapsed #area-menu .lista-menu .item-menu-out .menu-icon {
+  border-right: 0px;
+}
+/* line 164, ../sass/admin.scss */
+#area-menu .menu-expander {
+  vertical-align: top;
+  line-height: 34px;
+}
+/* line 167, ../sass/admin.scss */
+.menu-collapsed #area-menu .menu-expander {
+  display: none;
+}
+/* line 172, ../sass/admin.scss */
+#area-menu .menu-collapse-area {
+  cursor: pointer;
+  background-image: url('/image/menu/weather-fog.png?1399898471');
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 16px;
+  margin: 10px;
+}
+
+/* line 181, ../sass/admin.scss */
+.menu-collapsed .menu-maga-logo {
+  display: none;
+}
+
+/* line 187, ../sass/admin.scss */
+.menu-icon-config {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -72px no-repeat;
+}
+
+/* line 190, ../sass/admin.scss */
+.menu-icon-cliente {
+  background: url('/image/menu-s6ea220e8b8.png') 0 0 no-repeat;
+}
+
+/* line 193, ../sass/admin.scss */
+.menu-icon-adm {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -216px no-repeat;
+}
+
+/* line 196, ../sass/admin.scss */
+.menu-icon-relatorio {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -144px no-repeat;
+}
+
+/* line 199, ../sass/admin.scss */
+.menu-icon-pedido {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -120px no-repeat;
+}
+
+/* line 202, ../sass/admin.scss */
+.menu-icon-atendimento {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -24px no-repeat;
+}
+
+/* line 205, ../sass/admin.scss */
+.menu-icon-catalogo {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -48px no-repeat;
+}
+
+/* line 208, ../sass/admin.scss */
+.menu-icon-usuario {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -400px no-repeat;
+}
+
+/* line 211, ../sass/admin.scss */
+.menu-icon-loja {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -240px no-repeat;
+}
+
+/* line 214, ../sass/admin.scss */
+.menu-icon-grupo-loja {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -304px no-repeat;
+}
+
+/* line 217, ../sass/admin.scss */
+.menu-icon-perfil {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -368px no-repeat;
+}
+
+/* line 220, ../sass/admin.scss */
+.menu-icon-tamanho-imagem {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -272px no-repeat;
+}
+
+/* line 223, ../sass/admin.scss */
+.menu-icon-pedido-situacao {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -448px no-repeat;
+}
+
+/* line 226, ../sass/admin.scss */
+.menu-icon-pagina-tipo {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -320px no-repeat;
+}
+
+/* line 229, ../sass/admin.scss */
+.menu-icon-midia {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -416px no-repeat;
+}
+
+/* line 232, ../sass/admin.scss */
+.menu-icon-page {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -432px no-repeat;
+}
+
+/* line 235, ../sass/admin.scss */
+.menu-icon-router {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -352px no-repeat;
+}
+
+/* line 238, ../sass/admin.scss */
+.menu-icon-system {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -256px no-repeat;
+}
+
+/* line 241, ../sass/admin.scss */
+.menu-icon-produto {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -168px no-repeat;
+}
+
+/* line 244, ../sass/admin.scss */
+.menu-icon-dashboard {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -96px no-repeat;
+}
+
+/* line 247, ../sass/admin.scss */
+.menu-icon-derivacao {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -200px no-repeat;
+}
+
+/* line 250, ../sass/admin.scss */
+.menu-icon-marca {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -184px no-repeat;
+}
+
+/* line 253, ../sass/admin.scss */
+.menu-icon-categoria {
+  background: url('/image/menu-s6ea220e8b8.png') 0 -384px no-repeat;
+}
+
+/* line 257, ../sass/admin.scss */
+#msg-div {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  width: 400px;
+  margin-left: -200px;
+  z-index: 20000;
+}
+/* line 264, ../sass/admin.scss */
+#msg-div .msg {
+  border-radius: 0px 0px 8px 8px;
+  background: #F6F6F6;
+  border: 2px solid #ccc;
+  border-width: 0px 2px 2px 2px;
+  padding: 10px 15px;
+  color: #555;
+}
+/* line 271, ../sass/admin.scss */
+#msg-div .msg h3 {
+  margin: 0 0 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+/* line 276, ../sass/admin.scss */
+#msg-div .msg span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+/* line 284, ../sass/admin.scss */
+#msg-div .msg p {
+  margin: 0;
+}
