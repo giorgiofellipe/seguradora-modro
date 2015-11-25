@@ -1,4 +1,4 @@
-/* INSERÇÃO DE  SISTEMA */
+﻿/* INSERÇÃO DE  SISTEMA */
 INSERT INTO "public".faderim_system (system_id, system_name, system_description, system_package, system_enable) 
 	VALUES ('SEGURADORA', 'Seguradora', 'Seguradora', 'Seguradora', true);
 /* INSERÇÃO DE  PAGES */
@@ -25,5 +25,17 @@ INSERT INTO "public".faderim_router (router_name, page_name, router_title, route
 INSERT INTO "public".usuario (usu_id, usu_nome, usu_senha, usu_login) 
 	VALUES (1, 'Administrador', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'seguradora@admin.com.br');
 
+insert into faderim_page (page_name, system_id, page_title) values ('seguradora_tipo_pergunta','SEGURADORA','Tipo de Pergunta');
+insert into faderim_page (page_name, system_id, page_title) values ('seguradora_tipo_seguro','SEGURADORA','Tipo de Seguro');
+
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_pergunta_list','seguradora_tipo_pergunta','Consulta de Tipos de Perguntas','Seguradora::Controller::Grid::TipoPerguntaGridController.view', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_pergunta_add','seguradora_tipo_pergunta','Incluir Tipo de Perguna','Seguradora::Controller::Form::TipoPerguntaFormController.add', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_pergunta_edit','seguradora_tipo_pergunta','Alterar Tipo de Perguna','Seguradora::Controller::Form::TipoPerguntaFormController.edit', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_pergunta_delete','seguradora_tipo_pergunta','Excluir Tipo de Perguna','Seguradora::Controller::Form::TipoPerguntaFormController.delete', null);
+
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_seguro_list','seguradora_tipo_seguro','Consulta de Tipos de Seguros','Seguradora::Controller::Grid::TipoSeguroGridController.view', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_seguro_add','seguradora_tipo_seguro','Incluir Tipo de Seguro','Seguradora::Controller::Form::TipoSeguroFormController.add', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_seguro_edit','seguradora_tipo_seguro','Alterar Tipo de Seguro','Seguradora::Controller::Form::TipoSeguroFormController.edit', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_tipo_seguro_delete','seguradora_tipo_seguro','Excluir Tipo de Seguro','Seguradora::Controller::Form::TipoSeguroFormController.delete', null);
 
 

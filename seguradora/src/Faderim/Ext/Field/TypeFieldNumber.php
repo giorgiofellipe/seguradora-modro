@@ -24,7 +24,7 @@ class TypeFieldNumber extends TypeField
 
     public function getExtType()
     {
-        return 'Ext.form.field.Number';
+        return 'Faderim.form.field.FieldNumber';
     }
 
     /*
@@ -32,4 +32,33 @@ class TypeFieldNumber extends TypeField
       {
       return 'numbercolumn';
       } */
+
+    public function setDecimal($decimal)
+    {
+        $this->setCustomProperty('precision', $decimal);
+        $this->setCustomProperty('defaultZero', true);
+        $this->setSeparadorDecimais();
+        $this->setSeparadorMilhares();
+    }
+
+    public function getSeparadorDecimais()
+    {
+        return $this->getCustomProperty('decimal');
+    }
+
+    public function getSeparadorMilhares()
+    {
+        return $this->getCustomProperty('thousands');
+    }
+
+    public function setSeparadorDecimais($separador = ',')
+    {
+        $this->setCustomProperty('decimal', $separador);
+    }
+
+    public function setSeparadorMilhares($separador = '.')
+    {
+        $this->setCustomProperty('thousands', $separador);
+    }
+
 }
