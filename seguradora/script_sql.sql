@@ -45,3 +45,10 @@ insert into faderim_router (router_name, page_name, router_title, router_control
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_pergunta_delete','seguradora_pergunta','Excluir Perguna','Seguradora::Controller::Form::PerguntaFormController.delete', null);
 
 
+/* CLIENTE */
+insert into faderim_page (page_name, system_id, page_title) values ('seguradora_cliente','SEGURADORA','Cliente');
+
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_list','seguradora_cliente','Consultar Cliente','Seguradora::Controller::Grid::ClienteGridController.view', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_add','seguradora_cliente','Incluir Cliente','Seguradora::Controller::Form::ClienteFormController.add', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_edit','seguradora_cliente','Alterar Cliente','Seguradora::Controller::Form::ClienteFormController.edit', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_delete','seguradora_cliente','Excluir Cliente','Seguradora::Controller::Form::ClienteFormController.delete', null);
