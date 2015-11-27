@@ -19,7 +19,7 @@ class ClienteGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
 
         $this->addChild(new GridField(TypeField::TYPE_TEXT, 'nome', 'Nome', 0.4, true));
 
-        $this->addChild(new GridField(TypeField::TYPE_NUMBER, 'cpf', 'CPF', 0.1, true));
+        $this->addChild(new GridField(TypeField::TYPE_NUMBER, 'cpf', 'CPF', 0.2, true));
 
         
         $this->addActionAdd('seg_cliente');

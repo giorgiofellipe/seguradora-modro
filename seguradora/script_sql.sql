@@ -52,3 +52,12 @@ insert into faderim_router (router_name, page_name, router_title, router_control
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_add','seguradora_cliente','Incluir Cliente','Seguradora::Controller::Form::ClienteFormController.add', null);
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_edit','seguradora_cliente','Alterar Cliente','Seguradora::Controller::Form::ClienteFormController.edit', null);
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_cliente_delete','seguradora_cliente','Excluir Cliente','Seguradora::Controller::Form::ClienteFormController.delete', null);
+
+
+/* APOLICES */
+insert into faderim_page (page_name, system_id, page_title) values ('seguradora_apolice','SEGURADORA','Proposta de Apólice');
+
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_list','seguradora_apolice','Consultar Apólices','Seguradora::Controller::Grid::ApoliceGridController.view', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_add','seguradora_apolice','Incluir Apólice','Seguradora::Controller::Form::ApoliceFormController.add', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_edit','seguradora_apolice','Alterar Apólice','Seguradora::Controller::Form::ApoliceFormController.edit', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_delete','seguradora_apolice','Excluir Apólice','Seguradora::Controller::Form::ApoliceFormController.delete', null);

@@ -62,6 +62,16 @@ class Cliente
      */
     protected $dataNascimento;
     
+    /**
+     * @OneToMany(targetEntity="ClienteEndereco", mappedBy="cliente",cascade={"persist", "remove", "refresh"})
+     * @var ClienteEndereco[]|\Doctrine\Common\Collections\ArrayCollection
+     */    
+    protected $clienteEndereco;
+    
+    public function __construct() {
+        $this->clienteEndereco = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+            
     function getId() {
         return $this->id;
     }
@@ -124,6 +134,21 @@ class Cliente
 
     function setDataNascimento(\DateTime $dataNascimento = null) {
         $this->dataNascimento = $dataNascimento;
+    }
+    
+    function getClienteEndereco() {
+        return $this->clienteEndereco;
+    }
+
+    function setClienteEndereco($clienteEndereco) {
+        $this->clienteEndereco = $clienteEndereco;
+    }
+        
+    public function newClienteEndereco(){
+        $clienteEndereco = new ClienteEndereco();
+        $clienteEndereco->setCliente($this);
+        $this->getClienteEndereco()->add($clienteEndereco);
+        return $clienteEndereco;
     }
 
 

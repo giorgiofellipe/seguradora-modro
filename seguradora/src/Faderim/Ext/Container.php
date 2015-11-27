@@ -76,9 +76,9 @@ class Container extends Component
         $this->setLayout(Array('type' => self::LAYOUT_TABLE, 'columns' => $columns));
     }
 
-    public function setLayoutStretch()
+    public function setLayoutStretch($layout = self::LAYOUT_VBOX)
     {
-        $this->setLayout(Array('type' => self::LAYOUT_VBOX, 'align' => 'stretch'));
+        $this->setLayout(Array('type' => $layout, 'align' => 'stretch'));
     }
 
     protected function getExtClassName()

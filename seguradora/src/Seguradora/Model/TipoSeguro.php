@@ -31,6 +31,16 @@ class TipoSeguro
      * @var float
      */
     protected $porcentagemFranquia;
+    
+    /**
+     * @OneToMany(targetEntity="TipoSeguroRegiao", mappedBy="tipoSeguro",cascade={"persist", "remove", "refresh"})
+     * @var TipoSeguroRegiao[]|\Doctrine\Common\Collections\ArrayCollection
+     */    
+    protected $tipoSeguroRegiao;
+    
+    public function __construct() {
+        $this->tipoSeguroRegiao = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     function getId()
     {
@@ -61,5 +71,22 @@ class TipoSeguro
     {
         $this->porcentagemFranquia = $porcentagemFranquia;
     }
+    
+    function getTipoSeguroRegiao() {
+        return $this->tipoSeguroRegiao;
+    }
+
+    function setTipoSeguroRegiao($tipoSeguroRegiao) {
+        $this->tipoSeguroRegiao = $tipoSeguroRegiao;
+    }
+    
+    public function newTipoSeguroRegiao(){
+        $new = new TipoSeguroRegiao();
+        $new->setTipoSeguro($this);
+        $this->getTipoSeguroRegiao()->add($new);
+        return $new;
+    }
+
+
 
 }

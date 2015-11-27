@@ -7,7 +7,7 @@ namespace Faderim\Ext\Field;
  *
  * @author Ricardo
  */
-class FormField extends BaseField
+class FormField extends BaseField 
 {
 
     //put your code here
@@ -16,10 +16,12 @@ class FormField extends BaseField
         parent::__construct($type, $name, $title);
         $this->setRequired($required);
         if ($maxLength) {
-            $this->setProperty('enforceMaxLength', true);
-            $this->setProperty('maxLength', $maxLength);
-            $this->setProperty('xtype', $type);
+            $this->setMaxLength($maxLength);
         }
+        $this->setProperty('xtype', $type);
+        $this->setProperty('msgTarget', 'qtip');
+//        $this->setProperty('beforeLabelTextTpl', Array('<tpl if="allowBlank==false"><span style="color:red"></tpl>'));
+//        $this->setProperty('afterLabelTextTpl', Array('<tpl if="allowBlank==false"></span></tpl>'));
     }
 
     public function setModelValue($value)
@@ -48,9 +50,11 @@ class FormField extends BaseField
     {
         $this->setProperty('allowBlank', (bool) !$required);
         if ($required) {
-            //$this->setProperty('afterLabelTextTpl', '<span style="color:red;font-weight:bold" data-qtip="Obrigatório">*</span>');
+            $this->setProperty('beforeLabelTextTpl', Array('<tpl><span style="color:red"></tpl>'));
+            $this->setProperty('afterLabelTextTpl', Array('<tpl></span></tpl>'));
         } else {
-            unset($this->properties['afterLabelTextTpl']);
+            $this->setProperty('beforeLabelTextTpl', Array(''));
+            $this->setProperty('afterLabelTextTpl', Array(''));
         }
     }
 
@@ -83,6 +87,17 @@ class FormField extends BaseField
             $aPropriedades[$sCustomKey] = $xValue;
         }
         return $aPropriedades;
+    }
+
+    public function setMaxLength($maxLength)
+    {
+        if ($maxLength) {
+            $this->setProperty('enforceMaxLength', true);
+            $this->setProperty('maxLength', $maxLength);
+        } else {
+            $this->removeProperty('enforceMaxLength');
+            $this->removeProperty('maxLength');
+        }
     }
 
 }

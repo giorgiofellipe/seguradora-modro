@@ -5,11 +5,11 @@ namespace Seguradora\Repository;
 use Faderim\Framework\Repository\BaseEntityRepository;
 
 /**
- * Description of ClienteRepository
+ * Description of TipoSeguroRepository
  *
  * @author Rodrigo Cândido
  */
-class ClienteRepository extends BaseEntityRepository
+class TipoSeguroRegiaoRepository extends BaseEntityRepository
 {
 
 }
