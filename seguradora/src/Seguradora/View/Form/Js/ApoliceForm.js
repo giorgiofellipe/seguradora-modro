@@ -4,6 +4,7 @@
             var tipoSeguro = this.down('[name="tipoSeguro"]');
             tipoSeguro.on({'selectRow':{fn: this.onSelectRow, scope: this}});
             this.down('[name="tipoSeguro/id"]').on({'blur':{fn: this.onBlurTipoSeguro, scope: this}});
+            this.onBlurTipoSeguro();
             
         }
     },    

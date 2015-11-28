@@ -56,7 +56,7 @@ class ApoliceForm extends \Faderim\Ext\AbstractForm
         $situacao->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getSituacaoList());
         $situacao->setModelValue(\Seguradora\Model\Apolice::SITUACAO_PENDENTE);
         
-        $bonus = new Field\FormField(TypeField::TYPE_LIST, 'bonus', 'Bônus', false);        
+        $bonus = new Field\FormField(TypeField::TYPE_LIST, 'bonus', 'Bônus (Nível)', false);        
         $bonus->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getBonusList());
         
         $this->setExtendedFromJs('Seguradora/View/Form/Js/ApoliceForm');
