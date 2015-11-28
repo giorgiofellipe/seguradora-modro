@@ -177,7 +177,8 @@
                 };
                 if (!component.width) {
                     windowConfig['width'] = 600;
-                }
+                }                
+                windowConfig.y = -100;
                 var win = new Ext.Window(windowConfig);
                 if (options.renderTo) {
                     options.renderTo.add(win).show();

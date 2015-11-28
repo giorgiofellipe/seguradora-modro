@@ -43,6 +43,8 @@ class ApoliceForm extends \Faderim\Ext\AbstractForm
         $tipoSeguro = new \Seguradora\View\Suggest\TipoSeguroSuggest();
         $tipoSeguro->setRequired(true);
         
+        $tipoSeguroRegiao = new Field\FormField(TypeField::TYPE_LIST, 'tipoSeguroRegiao', 'Região', false);        
+        $tipoSeguroRegiao->getTypeField()->getLocalStore()->setEnumerator(new \Faderim\Util\Enumerator(array()));
         
         $descricao = new Field\FormField(TypeField::TYPE_TEXT_AREA, 'descricaoBem', 'Descrição do Bem', true);        
         
@@ -57,9 +59,9 @@ class ApoliceForm extends \Faderim\Ext\AbstractForm
         $bonus = new Field\FormField(TypeField::TYPE_LIST, 'bonus', 'Bônus', false);        
         $bonus->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getBonusList());
         
-        
+        $this->setExtendedFromJs('Seguradora/View/Form/Js/ApoliceForm');
 
-        $this->addChilds($id, $dataIni, $dataFim,$cliente,$proprietario,$condutor,$tipoSeguro,$descricao,$valorBem,$situacao,$bonus);
+        $this->addChilds($id, $dataIni, $dataFim,$cliente,$proprietario,$condutor,$tipoSeguro,$tipoSeguroRegiao,$descricao,$valorBem,$situacao,$bonus);
     }
 
     protected function getFormName()

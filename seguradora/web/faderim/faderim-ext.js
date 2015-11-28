@@ -277,7 +277,7 @@ Ext.define('Faderim.AjaxRouter', {
                 if (Faderim.AjaxRouter.componentCallback[target]) {
                     Faderim.AjaxRouter.componentCallback[target](loader, self.config);
                 }
-                else {
+                else if(target) {
                     target.add(loader);
                 }
             },

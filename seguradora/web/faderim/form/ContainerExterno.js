@@ -107,7 +107,29 @@ Ext.define('Faderim.form.ContainerExterno', {
             this.bindField.setValue(JSON.stringify(row));
         }
         this.fireEvent('selectRow', row);
-
+        //setamos o focus para o próximo
+        if (row !== null) {
+            var next = this.next();
+            while (next && next.isVisible() == false) {
+                next = next.next();
+                if (!next) {
+                    break;
+                }
+            }
+            if (next) {
+                if (next.isXType('containerExterno')) {
+                    next.objFocus.focus();
+                } else {
+                    next.focus();
+                }
+                //forçamos no suggest
+            } else if (this.suggest) {
+                this.suggest.focus();
+                //forçamos no botão de busca
+            } else if (this.buttonFind) {
+                this.buttonFind.focus();
+            }
+        }
     },
     createFind: function() {
         for (var i = 0; i < this.fields.length; i++) {

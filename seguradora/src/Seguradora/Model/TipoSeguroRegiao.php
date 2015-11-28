@@ -70,6 +70,10 @@ class TipoSeguroRegiao
     function setPorcentagem($porcentagem) {
         $this->porcentagem = $porcentagem;
     }
+    
+    public function getDescricaoList(){
+        return $this->getRegiao() . ' ('.$this->getPorcentagem() . '%)';
+    }
 
 
 
