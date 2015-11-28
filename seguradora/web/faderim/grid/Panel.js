@@ -178,12 +178,7 @@ Ext.define('Faderim.grid.Panel', {
             itens.unshift({
                 xtype: 'tbfill'
             });
-            itens.push(find);
-            itens.push({
-                text: 'Limpar',
-                iconCls: 'icon-magnifier',
-                xtype: 'button'
-            });
+            itens.push(find);            
             var tool = {
                 xtype: 'toolbar',
                 cls: 'grid-header-filter',

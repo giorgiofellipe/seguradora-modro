@@ -23,8 +23,8 @@ Ext.define('Faderim.form.Panel', {
     },
     buttons: [{
             text: 'Gravar',
-            formBind: true,
-            disabled: true,
+            formBind: false,
+            disabled: false,
             handler: function() {
                 var panel = this.up('form');
                 var form = this.up('form').getForm();

@@ -82,8 +82,16 @@ Ext.define('Faderim.form.ContainerExterno', {
                             self.selectRow(records[0]['data']);
                         }
                         else {
-                            self.selectRow(null);
-                            alert('Registro não encontrado');
+                            self.selectRow(null);                            
+                            Ext.Msg.alert('Aviso', 'Registro não encontrado!', function(e) {
+                                for (var i = 0; i < self.fields.length; i++) {
+                                    var obj = self.fields[i];
+                                    if (obj.find) {
+                                        var el = obj.getBind();
+                                        el.focus();
+                                    }
+                                }
+                            });
                         }
                     }
                 }
@@ -107,7 +115,29 @@ Ext.define('Faderim.form.ContainerExterno', {
             this.bindField.setValue(JSON.stringify(row));
         }
         this.fireEvent('selectRow', row);
-
+        //setamos o focus para o próximo
+        if (row !== null) {
+            var next = this.next();
+            while (next && next.isVisible() == false) {
+                next = next.next();
+                if (!next) {
+                    break;
+                }
+            }
+            if (next) {
+                if (next.isXType('containerExterno')) {
+                    next.objFocus.focus();
+                } else {
+                    next.focus();
+                }
+                //forçamos no suggest
+            } else if (this.suggest) {
+                this.suggest.focus();
+                //forçamos no botão de busca
+            } else if (this.buttonFind) {
+                this.buttonFind.focus();
+            }
+        }
     },
     createFind: function() {
         for (var i = 0; i < this.fields.length; i++) {

@@ -6,10 +6,12 @@ Ext.define('Faderim.view.GridForm', {
     isFormField : true,            
     childsValidateDuplicate : null,            
     initRow: 2,
+    hiddenButton:false,
     camposLinha: null,
     data: null,
     constructor: function(options) {
         this.camposLinha = options.items;        
+        this.hiddenButton = options.hiddenButton;                
         if (options.items) {
             options.items = [this.getPanelInicial()];
         }        
@@ -130,7 +132,8 @@ Ext.define('Faderim.view.GridForm', {
             }
         }
         var fields = this.camposLinha.call();
-        enableChildFormFieldGrid(fields);
+        enableChildFormFieldGrid(fields);        
+        var hiddenButton = this.hiddenButton;
         return Ext.create("Ext.panel.Panel",
                 {
                     rowStandard: true,                                        
@@ -147,6 +150,7 @@ Ext.define('Faderim.view.GridForm', {
                             xtype: 'toolbar',
                             dock: 'right',
                             width: 60,                            
+                            hidden:hiddenButton,
                             layout: {type:'hbox',pack: 'center'},                            
                             items: [{text: '-',
                                     xtype: 'button',
