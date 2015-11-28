@@ -66,6 +66,31 @@ class Apolice
      */
     protected $descricaoBem;
     
+    
+    /**
+     * @Column(type="string", length=20, name="apol_placa",nullable=true)
+     * @var string
+     */
+    protected $placa;
+    
+    /**
+     * @Column(type="integer",  name="apol_ano_modelo",nullable=true)
+     * @var int
+     */
+    protected $anoModelo;
+    
+    /**
+     * @Column(type="integer",  name="apol_ano_fabricacao",nullable=true)
+     * @var int
+     */
+    protected $anoFabricacao;
+    
+    /**
+     * @Column(type="string", length=200,  name="apol_fabricante",nullable=true)
+     * @var string
+     */
+    protected $fabricante;
+    
     /**
      * @Column(type="decimal",precision=10, scale=2, name="apol_valor_bem",nullable=false)
      * @var float
@@ -190,7 +215,40 @@ class Apolice
     function setBonus($bonus) {
         $this->bonus = $bonus;
     }
+    
+    function getPlaca() {
+        return $this->placa;
+    }
 
+    function getAnoModelo() {
+        return $this->anoModelo;
+    }
+
+    function getAnoFabricacao() {
+        return $this->anoFabricacao;
+    }
+
+    function getFabricante() {
+        return $this->fabricante;
+    }
+
+    function setPlaca($placa) {
+        $this->placa = $placa;
+    }
+
+    function setAnoModelo($anoModelo) {
+        $this->anoModelo = $anoModelo;
+    }
+
+    function setAnoFabricacao($anoFabricacao) {
+        $this->anoFabricacao = $anoFabricacao;
+    }
+
+    function setFabricante($fabricante) {
+        $this->fabricante = $fabricante;
+    }
+
+    
     
     public static function getBonusList()
     {

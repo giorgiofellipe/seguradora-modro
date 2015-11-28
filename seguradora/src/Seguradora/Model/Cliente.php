@@ -39,7 +39,7 @@ class Cliente
     protected $email;
     
     /**
-     * @Column(type="string", length=10, name="pes_telefone", nullable=true)
+     * @Column(type="string", length=20, name="pes_telefone", nullable=true)
      * @var string
      */
     protected $telefone;
