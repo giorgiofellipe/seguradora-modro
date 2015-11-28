@@ -82,8 +82,16 @@ Ext.define('Faderim.form.ContainerExterno', {
                             self.selectRow(records[0]['data']);
                         }
                         else {
-                            self.selectRow(null);
-                            alert('Registro não encontrado');
+                            self.selectRow(null);                            
+                            Ext.Msg.alert('Aviso', 'Registro não encontrado!', function(e) {
+                                for (var i = 0; i < self.fields.length; i++) {
+                                    var obj = self.fields[i];
+                                    if (obj.find) {
+                                        var el = obj.getBind();
+                                        el.focus();
+                                    }
+                                }
+                            });
                         }
                     }
                 }
