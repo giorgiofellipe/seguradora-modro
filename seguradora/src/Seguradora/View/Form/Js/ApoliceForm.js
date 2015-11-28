@@ -1,17 +1,10 @@
 ({
     listeners: {
-        beforerender: function() {
-            
+        afterrender: function() {
             var tipoSeguro = this.down('[name="tipoSeguro"]');
             tipoSeguro.on({'selectRow':{fn: this.onSelectRow, scope: this}});
             this.down('[name="tipoSeguro/id"]').on({'blur':{fn: this.onBlurTipoSeguro, scope: this}});
             
-        },
-        afterrender:function(){
-            var tipoSeguroRegiao = this.down('[name="tipoSeguroRegiao"]');
-            if(!tipoSeguroRegiao.getValue()){
-                tipoSeguroRegiao.hide();
-            }
         }
     },    
     onBlurTipoSeguro:function(){
@@ -27,8 +20,7 @@
                 method: 'POST',
                 router: this.routerName,
                 action: 'buscaTipoSeguroRegiao',
-                maskTarget: this,
-                //target:'hide',
+                maskTarget: this,            
                 params: {tipoSeguro:linha.id},
                 success:function(retorno){                    
                     if(retorno.regiao){                        
@@ -38,8 +30,6 @@
                     }
                 }
             });
-        } else {
-            tipoSeguroRegiao.hide();
-        }
+        } 
     }
 })

@@ -20,8 +20,47 @@ class ApoliceFormController extends \Faderim\Framework\Controller\BaseFormContro
         return new \Seguradora\View\Form\ApoliceForm();
     }
     
-    public function buscaTipoSeguroRegiao(){
-        $tipoSeguro = $this->getRequest()->getParameter('tipoSeguro');
+    protected function createInstanceFormBean() {
+        $bean = parent::createInstanceFormBean();
+        $bean->addMappingProperty('tipoSeguroRegiao', null);
+        return $bean;
+    }
+    /**
+     * 
+     * @return \Seguradora\Model\Apolice
+     */
+    public function getModel() {
+        return parent::getModel();
+    }
+    
+    protected function beanModel() {
+        parent::beanModel();
+        $idTipoSeguroRegiao = $this->getView()->findChild('tipoSeguroRegiao')->getModelValue();
+        $tipoSeguroRegiao = null;
+        if($idTipoSeguroRegiao){
+            $tipoSeguroRegiao = $this->getEntityManager()->getRepository('Seguradora\Model\TipoSeguroRegiao')->find($idTipoSeguroRegiao);            
+        }
+        $this->getModel()->setTipoSeguroRegiao($tipoSeguroRegiao);        
+    }
+    
+    protected function beanForm() {
+        parent::beanForm();
+        if($this->getModel()->getTipoSeguroRegiao()){
+            $list = Array();
+            foreach($this->getModel()->getTipoSeguro()->getTipoSeguroRegiao() as $tipoSeguroRegiao){
+                $list[$tipoSeguroRegiao->getId()] = $tipoSeguroRegiao->getDescricaoList();
+            }
+            if(count($list) == 0){
+                $this->getView()->findChild('tipoSeguroRegiao')->setHidden();
+            } else {
+                $this->getView()->findChild('tipoSeguroRegiao')->getTypeField()->getLocalStore()->setEnumerator(new \Faderim\Util\Enumerator($list));
+                $this->getView()->findChild('tipoSeguroRegiao')->setModelValue($this->getModel()->getTipoSeguroRegiao()->getId());
+            }            
+        }
+    }
+    
+    public function buscaTipoSeguroRegiao($tipoSeguro = null){
+        $tipoSeguro = $this->getRequest()->getParameter('tipoSeguro',$tipoSeguro);
         /* @var $tipoSeguro \Seguradora\Model\TipoSeguro */
         $tipoSeguro = $this->getEntityManager()->getRepository('Seguradora\Model\TipoSeguro')->find($tipoSeguro);
         $list = false;
