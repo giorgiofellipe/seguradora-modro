@@ -115,8 +115,8 @@
                             margin: '10 0 0 7',
                             listeners: {
                                 beforeadd: function(tab, comp) {
-                                    var icon = MagazordIcons[comp.routerName];
-                                    comp.icon = Faderim.Util.icon(icon);
+                                    //var icon = MagazordIcons[comp.routerName];
+                                    //comp.icon = Faderim.Util.icon(icon);
                                 }
                             },
                             id: 'tab-admin-container',
@@ -203,7 +203,7 @@
     <body>
         <div id="area-superior">
             <div>                
-                <span class="maga-title">&nbsp;&nbsp;SisSeguros - Software para Seguradoras</span>                                
+                <span class="maga-title">&nbsp;&nbsp;<span style="color: #ADD2ED;">SisSeguros</span>  <span style="font-size: 14px;">Software para Seguradoras</span></span>                                
                 <div class="area-avatar">
                     <span class="avatar-nome">{{usuario.nome}}<a href="{{web_router('seg_logout')}}">Sair</a><br/>                        
                     </span>

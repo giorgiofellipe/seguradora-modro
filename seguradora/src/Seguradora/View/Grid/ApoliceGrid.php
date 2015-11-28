@@ -16,9 +16,12 @@ class ApoliceGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
     protected function createComponents()
     {
         $this->addChild(new GridField(TypeField::TYPE_NUMBER, 'id', 'Número', 0.1, true));
-        $this->addChild(new GridField(TypeField::TYPE_DATE, 'dataInicio', 'Data Início', 0.2, true));
-        $this->addChild(new GridField(TypeField::TYPE_DATE, 'dataFim', 'Data Fim', 0.2, true));
+        $this->addChild(new GridField(TypeField::TYPE_TEXT, 'descricaoBem', 'Bem', 0.2, true));
         $this->addChild(new GridField(TypeField::TYPE_TEXT, 'cliente/nome', 'Cliente', 0.4, true));
+        $this->addChild(new GridField(TypeField::TYPE_DATE, 'dataInicio', 'Data Início', 0.2, true));
+        $this->addChild(new GridField(TypeField::TYPE_DATE, 'dataFim', 'Data Fim', 0.2, true));        
+        $situacao = $this->addChild(new GridField(TypeField::TYPE_LIST, 'situacao', 'Situação', 0.4, true));
+        $situacao->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getSituacaoList());
         
         $this->addActionAdd('seg_apolice');
         $this->addActionEdit('seg_apolice');
