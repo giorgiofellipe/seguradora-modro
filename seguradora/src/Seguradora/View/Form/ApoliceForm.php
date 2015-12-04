@@ -64,9 +64,14 @@ class ApoliceForm extends \Faderim\Ext\AbstractForm
         $bonus = new Field\FormField(TypeField::TYPE_LIST, 'bonus', 'Bônus (Nível)', false);        
         $bonus->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getBonusList());
         
+        
+        $valorPremio = new Field\FormField(TypeField::TYPE_NUMBER, 'valorPremio', 'Valor do Prêmio', false, 10);
+        $valorPremio->getTypeField()->setDecimal(2);
+        $valorPremio->setReadOnly(true);
+        
         $this->setExtendedFromJs('Seguradora/View/Form/Js/ApoliceForm');
 
-        $this->addChilds($id, $dataIni, $dataFim,$cliente,$proprietario,$condutor,$tipoSeguro,$tipoSeguroRegiao,$descricao,$placa,$anoModelo,$anoFabricacao,$fabricante,$valorBem,$situacao,$bonus);
+        $this->addChilds($id, $dataIni, $dataFim,$cliente,$proprietario,$condutor,$tipoSeguro,$tipoSeguroRegiao,$descricao,$placa,$anoModelo,$anoFabricacao,$fabricante,$valorBem,$situacao,$bonus,$valorPremio);
     }
 
     protected function getFormName()

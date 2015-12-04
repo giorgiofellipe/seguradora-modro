@@ -57,12 +57,34 @@ class PerguntaFormController extends \Faderim\Framework\Controller\BaseFormContr
                     }
                 }
                 
+                $percentualPremio = $apolice->getTipoSeguroRegiao()->getPorcentagem();
+                
                 foreach ($apolice->getApolicePerguntas() as $apolicePergunta) {
+                    //sempre que respondermos novamente vamos buscar os mais novos valores da pergunta
+                    //para que em caso de atualizacao de valores não fique incorreto o cálculo
+                    $pergunta = $apolicePergunta->getPergunta();
+                    $apolicePergunta->setTipoPergunta($pergunta->getTipoPergunta());
+                    $apolicePergunta->setDescricao($pergunta->getDescricao());
+                    $apolicePergunta->setPorcentagem($pergunta->getPorcentagem());
+                    $apolicePergunta->setFormaAplicarPorcentagem($pergunta->getFormaAplicarPorcentagem());
+                    
                     if ($apolicePergunta->getResposta() == null) {
                         $apolicePergunta->setResposta(false);
                     }
+                    
+                    if ($apolicePergunta->getResposta() == true) {
+                        if ($apolicePergunta->getFormaAplicarPorcentagem() == \Seguradora\Model\Pergunta::FORMA_APLICAR_PORCENTAGEM_ACRESCENTAR) {
+                            $percentualPremio += $apolicePergunta->getPorcentagem();
+                        } else {
+                            $percentualPremio -= $apolicePergunta->getPorcentagem();
+                        }
+                    }
+                    
                     $this->getEntityManager()->persist($apolicePergunta);
                 }
+                
+                $apolice->setValorPremio($apolice->getValorBem() * $percentualPremio / 100);
+                $this->getEntityManager()->persist($apolice);
                 
                 $this->getEntityManager()->flush();
                 $this->getEntityManager()->commit();
