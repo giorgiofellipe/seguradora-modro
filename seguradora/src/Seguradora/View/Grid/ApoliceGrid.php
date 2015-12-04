@@ -24,6 +24,7 @@ class ApoliceGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
         $situacao->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getSituacaoList());
         
         $this->addActionAdd('seg_apolice');
+        $this->addAction('Relatórios Gerenciais', 'seg_report_printer');        
         $this->addActionEdit('seg_apolice');
         $this->addActionDelete('seg_apolice');
     }
