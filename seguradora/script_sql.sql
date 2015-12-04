@@ -5,7 +5,7 @@ INSERT INTO "public".faderim_system (system_id, system_name, system_description,
 INSERT INTO "public".faderim_page (page_name, system_id, page_title) 
 	VALUES ('seguradora_admin', 'SEGURADORA', 'Painel Administrativo');
 INSERT INTO "public".faderim_page (page_name, system_id, page_title) 
-	VALUES ('seguradora_login', 'SEGURADORA', 'Login');
+	VALUES ('seguradora_login', 'SEGURADORA', 'Login');	
 /* INSERÇÃO DE ROTAS */
 INSERT INTO "public".faderim_router (router_name, page_name, router_title, router_controller, router_path) 
 	VALUES ('seg_admin', 'seguradora_admin', 'Administrador', 'Seguradora::Controller::AdminIndexController.view', '/');
@@ -61,3 +61,8 @@ insert into faderim_router (router_name, page_name, router_title, router_control
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_add','seguradora_apolice','Incluir Apólice','Seguradora::Controller::Form::ApoliceFormController.add', null);
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_edit','seguradora_apolice','Alterar Apólice','Seguradora::Controller::Form::ApoliceFormController.edit', null);
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_delete','seguradora_apolice','Excluir Apólice','Seguradora::Controller::Form::ApoliceFormController.delete', null);
+
+
+/* QUESTIONARIO */
+
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_pergunta_answer','seguradora_pergunta','Responder Questionario','Seguradora::Controller::Form::PerguntaFormController.answer', null);
