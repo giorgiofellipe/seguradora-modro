@@ -73,4 +73,17 @@ class ApoliceFormController extends \Faderim\Framework\Controller\BaseFormContro
         return new \Faderim\Core\JsonResponse(Array('regiao'=>$list));
     }
 
+    protected function addPost() {
+        $this->beanPost();
+        $perguntas = $this->getEntityManager()->getRepository('\Seguradora\Model\Pergunta')->findAll();
+        foreach ($perguntas as $pergunta) {
+            $apolicePergunta = $this->getModel()->newApolicePergunta();
+            $apolicePergunta->setPergunta($pergunta);
+            $apolicePergunta->setDescricao($pergunta->getDescricao());
+            $apolicePergunta->setPorcentagem($pergunta->getPorcentagem());
+            $apolicePergunta->setFormaAplicarPorcentagem($pergunta->getFormaAplicarPorcentagem());
+        }
+        $this->getEntityManager()->persist($this->getModel());
+        $this->getEntityManager()->flush();
+    }
 }

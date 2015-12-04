@@ -120,6 +120,16 @@ class Apolice
      */
     protected $bonus;
 
+    /**
+     * @OneToMany(targetEntity="ApolicePergunta", mappedBy="apolice", cascade={"persist", "remove", "refresh"})
+     * @var ApolicePergunta[]|\Doctrine\Common\Collections\ArrayCollection
+     */    
+    protected $apolicePerguntas;
+    
+    public function __construct() {
+        $this->apolicePerguntas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     function getId() {
         return $this->id;
     }
@@ -275,6 +285,13 @@ class Apolice
         ));
     }
 
+    
+    public function newApolicePergunta() {
+        $apolicePergunta = new ApolicePergunta();
+        $apolicePergunta->setApolice($this);
+        $this->apolicePerguntas->add($apolicePergunta);
+        return $apolicePergunta;
+    }
     
 
 }
