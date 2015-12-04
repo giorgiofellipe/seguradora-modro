@@ -79,6 +79,7 @@ class ApoliceFormController extends \Faderim\Framework\Controller\BaseFormContro
         foreach ($perguntas as $pergunta) {
             $apolicePergunta = $this->getModel()->newApolicePergunta();
             $apolicePergunta->setPergunta($pergunta);
+            $apolicePergunta->setTipoPergunta($pergunta->getTipoPergunta());
             $apolicePergunta->setDescricao($pergunta->getDescricao());
             $apolicePergunta->setPorcentagem($pergunta->getPorcentagem());
             $apolicePergunta->setFormaAplicarPorcentagem($pergunta->getFormaAplicarPorcentagem());

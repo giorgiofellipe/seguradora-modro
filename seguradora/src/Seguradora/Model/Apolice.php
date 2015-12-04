@@ -122,6 +122,7 @@ class Apolice
 
     /**
      * @OneToMany(targetEntity="ApolicePergunta", mappedBy="apolice", cascade={"persist", "remove", "refresh"})
+     * @OrderBy({"tipoPergunta" = "ASC"})
      * @var ApolicePergunta[]|\Doctrine\Common\Collections\ArrayCollection
      */    
     protected $apolicePerguntas;
@@ -285,6 +286,13 @@ class Apolice
         ));
     }
 
+    public function getApolicePerguntas() {
+        return $this->apolicePerguntas;
+    }
+
+    public function setApolicePerguntas($apolicePerguntas) {
+        $this->apolicePerguntas = $apolicePerguntas;
+    }
     
     public function newApolicePergunta() {
         $apolicePergunta = new ApolicePergunta();

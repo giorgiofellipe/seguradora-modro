@@ -23,6 +23,8 @@ class ApoliceGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
         $this->addActionAdd('seg_apolice');
         $this->addActionEdit('seg_apolice');
         $this->addActionDelete('seg_apolice');
+        
+        $this->addRowAction('Responder Questionário', 'seg_pergunta_answer');
     }
 
     protected function getPageName()
