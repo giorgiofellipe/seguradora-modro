@@ -78,14 +78,17 @@ class ApoliceFormController extends \Faderim\Framework\Controller\BaseFormContro
 
     protected function addPost() {
         $this->beanPost();
+        /* @var $perguntas \Seguradora\Model\Pergunta[] */
         $perguntas = $this->getEntityManager()->getRepository('\Seguradora\Model\Pergunta')->findAll();
         foreach ($perguntas as $pergunta) {
-            $apolicePergunta = $this->getModel()->newApolicePergunta();
-            $apolicePergunta->setPergunta($pergunta);
-            $apolicePergunta->setTipoPergunta($pergunta->getTipoPergunta());
-            $apolicePergunta->setDescricao($pergunta->getDescricao());
-            $apolicePergunta->setPorcentagem($pergunta->getPorcentagem());
-            $apolicePergunta->setFormaAplicarPorcentagem($pergunta->getFormaAplicarPorcentagem());
+            if($pergunta->isTipoSeguro($this->getModel()->getTipoSeguro())){
+                $apolicePergunta = $this->getModel()->newApolicePergunta();
+                $apolicePergunta->setPergunta($pergunta);
+                $apolicePergunta->setTipoPergunta($pergunta->getTipoPergunta());
+                $apolicePergunta->setDescricao($pergunta->getDescricao());
+                $apolicePergunta->setPorcentagem($pergunta->getPorcentagem());
+                $apolicePergunta->setFormaAplicarPorcentagem($pergunta->getFormaAplicarPorcentagem());
+            }
         }
         $this->getEntityManager()->persist($this->getModel());
         $this->getEntityManager()->flush();

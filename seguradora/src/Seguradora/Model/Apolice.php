@@ -337,5 +337,19 @@ class Apolice
         return $apolicePergunta;
     }
     
-
+    public function getPercentualPremio(){
+        $bonus = $this->getBonus();
+        if($bonus){
+            return $bonus * 2;
+        }
+        return false;
+    }
+    
+    public function getValorFranquia(){
+        return $this->getValorBem() * $this->getTipoSeguro()->getPorcentagemFranquia() / 100;
+    }
+    
+    public function setValorFranquia($l){
+        
+    }
 }

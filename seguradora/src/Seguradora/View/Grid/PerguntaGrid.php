@@ -28,7 +28,7 @@ class PerguntaGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
 
         $formaAplicarPorcentagem = $this->addChild(new GridField(TypeField::TYPE_LIST, 'formaAplicarPorcentagem', 'Forma de Aplicar Porcentagem', 0.2, true));
         $formaAplicarPorcentagem->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Pergunta::getFormaAplicarPorcentagemLista());
-
+        $this->setSortInitial('id','desc');
         $this->addActionAdd('seg_pergunta');
         $this->addActionEdit('seg_pergunta');
         $this->addActionDelete('seg_pergunta');

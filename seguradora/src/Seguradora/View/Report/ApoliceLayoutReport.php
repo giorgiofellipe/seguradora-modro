@@ -12,7 +12,10 @@ class ApoliceLayoutReport extends BaseLayoutReport {
     
     public function render() {
         $this->createInformacaoGeral();
+        echo '<hr />';
         $this->createQuestionario();
+        echo '<hr />';
+        $this->createOpcoesParcelamento();
         echo '<hr />';
     }
     
@@ -40,23 +43,47 @@ class ApoliceLayoutReport extends BaseLayoutReport {
         echo '</tr>';
         
         echo '<tr>';
+        echo '<td>Tipo do Seguro: </td>';
+        echo '<td colspan="2">'.$this->getModel()->getTipoSeguro()->getDescricao().'</td>';
+        echo '<td>Seguro Região: </td>';
+        echo '<td colspan="2">'.$this->getModel()->getTipoSeguroRegiao()->getRegiao().'</td>';        
+        echo '</tr>';
+        
+        echo '<tr>';
         echo '<td>Descrição do Bem: </td>';
         echo '<td colspan="5">'.$this->getModel()->getDescricaoBem().'</td>';
         echo '</tr>';
         
         echo '<tr>';
+        echo '<td>Ano Fabricação/Modelo: </td>';
+        echo '<td>'.   $this->getModel()->getAnoFabricacao().'/'.   $this->getModel()->getAnoModelo().'</td>';
+        echo '<td>Fabricante: </td>';
+        echo '<td>'.   $this->getModel()->getFabricante().'</td>';
+        echo '<td>Placa: </td>';
+        echo '<td>'.   $this->getModel()->getPlaca().'</td>';        
+        echo '</tr>';
+        
+        echo '<tr>';
+        echo '<td>Proprietário: </td>';
+        echo '<td colspan="2">'.   $this->getModel()->getProprietario()->getNome().'</td>';
+        echo '<td>Condutor: </td>';
+        echo '<td colspan="2">'.   $this->getModel()->getCondutor()->getNome().'</td>';        
+        echo '</tr>';
+        
+        echo '<tr>';
         echo '<td>Valor do Bem: </td>';
-        echo '<td>'.   $this->getModel()->getValorBem().'</td>';
+        echo '<td>R$ '.   \Faderim\Util\FloatUtil::floatToStr($this->getModel()->getValorBem()).'</td>';
         echo '<td>Valor do Prêmio: </td>';
-        echo '<td>'.$this->getModel()->getValorPremio().'</td>';
+        echo '<td>R$ '. \Faderim\Util\FloatUtil::floatToStr($this->getModel()->getValorPremio()).'</td>';
         echo '<td>Valor Franquia: </td>';
-        echo '<td>??</td>';        
+        echo '<td>R$ '.\Faderim\Util\FloatUtil::floatToStr($this->getModel()->getValorFranquia()).'</td>';        
         echo '</tr>';
         echo '</table>';
     }
     
     public function createQuestionario(){        
-        echo '<div style="width:88%;text-align:left;border-left:1px solid black;border-right:1px solid black;margin: 0 auto;padding:5px;">';
+        echo '<h4>Cláusulas e Questionário</h4>';
+        echo '<div style="width:88%;text-align:left;margin: 0 auto;padding:5px;">';
         foreach($this->getModel()->getApolicePerguntaAgrupadoReport() as $grupos){
             foreach($grupos as $index => $apolicePergunta){
                 if($index == 0){
@@ -68,6 +95,22 @@ class ApoliceLayoutReport extends BaseLayoutReport {
             echo '</ul>';
         }
         echo '</div>';
+    }
+    public function createOpcoesParcelamento(){        
+        echo '<h4>Opções de Parcelamento</h4>';
+        echo '<table align="center" class="table">';
+        echo '<tr class="titulo fundo_titulo">';
+        echo '<td>Parcelas</td>';
+        echo '<td>Valor</td>';
+        echo '</tr>';
+        for($x = 1; $x <=10;$x++){
+            $valorParcela = $this->getModel()->getValorPremio() / $x;
+            echo '<tr>';
+            echo '<td>'. str_pad($x, 2,'0',STR_PAD_LEFT). 'x</td>';
+            echo '<td>R$ '.\Faderim\Util\FloatUtil::floatToStr($valorParcela).'</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
     }
 
 

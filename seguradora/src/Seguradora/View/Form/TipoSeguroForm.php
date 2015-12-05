@@ -30,7 +30,7 @@ class TipoSeguroForm extends \Faderim\Ext\AbstractForm
     protected function createTipoSeguroRegiao(){
         $tipoSeguroRegiao = new \Faderim\Ext\GridForm('tipoSeguroRegiao');
         $tipoSeguroRegiao->setLinhasIniciais(1);
-        $tipoSeguroRegiao->setTitle("Percentual sobre o valor base do bem por regiãopara o valor prêmio");        
+        $tipoSeguroRegiao->setTitle("Percentual sobre o valor base do bem por região para o valor prêmio");        
         $tipoSeguroRegiao->setLayoutStretch(self::LAYOUT_VBOX);
         
         $linha = new \Faderim\Ext\Container('linha');

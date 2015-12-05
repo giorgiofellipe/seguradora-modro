@@ -1,8 +1,7 @@
 ({
     listeners: {
         beforerender: function() {
-           var acaoImpressao = this.down('[name="seg_apolice_printer"]');	
-           console.log(acaoImpressao);
+           var acaoImpressao = this.down('[name="seg_apolice_printer"]');	           
            if (acaoImpressao) {                	
                acaoImpressao.clearListeners();	
                acaoImpressao.setHandler(this.onClickImprimir,this);	

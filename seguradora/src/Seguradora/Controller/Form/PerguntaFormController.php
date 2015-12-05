@@ -31,7 +31,7 @@ class PerguntaFormController extends \Faderim\Framework\Controller\BaseFormContr
         if ($this->getRequest()->isPost()) {
             try {
                 $this->getEntityManager()->beginTransaction();
-                
+                /* @var $apolice \Seguradora\Model\Apolice */
                 $apolice = null;
                 
                 //gambiarra do caralho
@@ -82,8 +82,12 @@ class PerguntaFormController extends \Faderim\Framework\Controller\BaseFormContr
                     
                     $this->getEntityManager()->persist($apolicePergunta);
                 }
-                
-                $apolice->setValorPremio($apolice->getValorBem() * $percentualPremio / 100);
+                $valorPremio = $apolice->getValorBem() * $percentualPremio / 100;
+                //vamos adicionar o bônus
+                if($apolice->getPercentualPremio()){
+                    $valorPremio = + $valorPremio - ($valorPremio * $apolice->getPercentualPremio() / 100) ;
+                }
+                $apolice->setValorPremio($valorPremio);
                 $this->getEntityManager()->persist($apolice);
                 
                 $this->getEntityManager()->flush();
@@ -94,8 +98,7 @@ class PerguntaFormController extends \Faderim\Framework\Controller\BaseFormContr
                 $success = false;
                 $msg = $ex->getMessage();
             }
-            $event = new \Faderim\Core\EventResponse($msg, $success);
-            $event->setReset(true);
+            $event = new \Faderim\Core\EventResponse($msg, $success);            
             $event->setResetCaller(true);
             $event->setClose(true);
             return $event;

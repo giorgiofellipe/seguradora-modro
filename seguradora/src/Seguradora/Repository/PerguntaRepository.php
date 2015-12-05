@@ -11,5 +11,4 @@ use Faderim\Framework\Repository\BaseEntityRepository;
  */
 class PerguntaRepository extends BaseEntityRepository
 {
-//put your code here
 }

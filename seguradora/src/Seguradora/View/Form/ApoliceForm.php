@@ -69,9 +69,13 @@ class ApoliceForm extends \Faderim\Ext\AbstractForm
         $valorPremio->getTypeField()->setDecimal(2);
         $valorPremio->setReadOnly(true);
         
+        $valorFranquia = new Field\FormField(TypeField::TYPE_TEXT, 'valorFranquia', 'Valor Frânquia', false, 100);
+        //$valorFranquia->getTypeField()->setDecimal(2);
+        $valorFranquia->setReadOnly(true);
+        
         $this->setExtendedFromJs('Seguradora/View/Form/Js/ApoliceForm');
 
-        $this->addChilds($id, $dataIni, $dataFim,$cliente,$proprietario,$condutor,$tipoSeguro,$tipoSeguroRegiao,$descricao,$placa,$anoModelo,$anoFabricacao,$fabricante,$valorBem,$situacao,$bonus,$valorPremio);
+        $this->addChilds($id, $dataIni, $dataFim,$cliente,$proprietario,$condutor,$tipoSeguro,$tipoSeguroRegiao,$descricao,$placa,$anoFabricacao,$anoModelo,$fabricante,$valorBem,$situacao,$bonus,$valorPremio,$valorFranquia);
     }
 
     protected function getFormName()

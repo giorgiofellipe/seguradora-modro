@@ -20,7 +20,7 @@ class ApoliceRepository extends BaseEntityRepository
         $params = Array();
         $colunaData = ($report == GerencialReportFormController::RELATORIO_GERENCIAL_HISTORICO_PROPOSTAS) ? 'dataInicio' : 'dataFim';
         $colunaData = 'apolice.' . $colunaData;
-        if($dataFim && $dataFim){            
+        if($dataInicio && $dataFim){            
             $dql .= ' and '. $colunaData . ' between :dataInicio and :dataFim' ;
             $params['dataInicio'] = $dataInicio->format(\Faderim\Date\DateTime::FORMAT_DATE_ISO);
             $params['dataFim'] = $dataFim->format(\Faderim\Date\DateTime::FORMAT_DATE_ISO);
@@ -37,7 +37,7 @@ class ApoliceRepository extends BaseEntityRepository
         }
 //        echo '<pre>';
 //        print_r($params);
-        $dql .= ' order by apolice.situacao ';
+        $dql .= ' order by apolice.situacao,apolice.id desc ';
         $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameters($params);
         $query->execute();

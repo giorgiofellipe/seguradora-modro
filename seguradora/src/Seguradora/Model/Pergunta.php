@@ -29,7 +29,7 @@ class Pergunta
      * @var TipoPergunta
      */
     protected $tipoPergunta;
-
+    
     /**
      * @Column(type="string", length=100, name="per_descricao")
      * @var string
@@ -47,6 +47,16 @@ class Pergunta
      * @var int
      */
     protected $formaAplicarPorcentagem;
+    
+    /**
+     * @OneToMany(targetEntity="PerguntaTipoSeguro", mappedBy="pergunta",cascade={"persist", "remove", "refresh"})
+     * @var PerguntaTipoSeguro[]|\Doctrine\Common\Collections\ArrayCollection
+     */    
+    protected $perguntaTipoSeguro;
+    
+    public function __construct() {
+        $this->perguntaTipoSeguro = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public static function getFormaAplicarPorcentagemLista()
     {
@@ -105,5 +115,31 @@ class Pergunta
     {
         $this->formaAplicarPorcentagem = $formaAplicarPorcentagem;
     }
+    
+    function getPerguntaTipoSeguro() {
+        return $this->perguntaTipoSeguro;
+    }
 
+    function setPerguntaTipoSeguro($perguntaTipoSeguro) {
+        $this->perguntaTipoSeguro = $perguntaTipoSeguro;
+    }
+    
+    public function newPerguntaTipoSeguro(){
+        $new = new PerguntaTipoSeguro();
+        $new->setPergunta($this);
+        $this->getPerguntaTipoSeguro()->add($new);
+        return $new;
+    }
+    
+    public function isTipoSeguro(TipoSeguro $tipoSeguro){
+        foreach($this->getPerguntaTipoSeguro() as $perguntaTipoSeguro){
+            if($perguntaTipoSeguro->getTipoSeguro()->getId() == $tipoSeguro->getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    
 }

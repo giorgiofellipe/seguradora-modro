@@ -23,8 +23,9 @@ class GerencialLayoutReport extends BaseLayoutReport {
         echo '<td>'.$this->getModel()->getDataFim()->format(\Faderim\Date\DateTime::FORMAT_DATE).'</td>';
         echo '<td>'. $this->getModel()->getTipoSeguro()->getDescricao().'</td>';
         echo '<td>'. $this->getModel()->getCliente()->getNome().'</td>';
-        echo '<td>'. $this->getModel()->getValorBem().'</td>';
-        echo '<td>'. $this->getModel()->getValorPremio().'</td>';
+        echo '<td>R$ '. \Faderim\Util\FloatUtil::floatToStr($this->getModel()->getValorBem()).'</td>';
+        echo '<td>R$ '. \Faderim\Util\FloatUtil::floatToStr($this->getModel()->getValorPremio()).'</td>';
+        echo '<td>R$ '. \Faderim\Util\FloatUtil::floatToStr($this->getModel()->getValorFranquia()).'</td>';
         echo '<td>'.  \Seguradora\Model\Apolice::getSituacaoList()->getDescription($this->getModel()->getSituacao()) .'</td>';
         echo '</tr>';
     }
@@ -41,6 +42,7 @@ class GerencialLayoutReport extends BaseLayoutReport {
                 <td>Cliente</td>
                 <td>Valor Bem</td>                
                 <td>Valor Prêmio</td>                
+                <td>Valor Franquia</td>                
                 <td>Situação</td>
             </tr>        
         <?php

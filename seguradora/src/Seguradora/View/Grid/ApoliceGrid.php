@@ -30,6 +30,7 @@ class ApoliceGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
         $this->addRowAction('Responder Questionário', 'seg_pergunta_answer');
         $imprimir =$this->addRowAction('Imprimir', 'seg_apolice_printer');
         $imprimir->setName('seg_apolice_printer');
+        $this->setSortInitial('id','desc');
         
         $this->setExtendedFromJs('Seguradora/View/Grid/Js/ApoliceGrid');
         
