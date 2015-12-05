@@ -47,9 +47,15 @@ abstract class BaseLayoutReport {
                     border-bottom: 1px solid black;
                     border-right: 1px solid black;
                 }
+                .table .label{
+                    text-align: right;
+                }
                 .titulo{
                     font-weight: bold;
                 }
+                .fundo_titulo{
+                    background-color: #ccc;
+                }                
             </style>
             <body class="body">
         <?php

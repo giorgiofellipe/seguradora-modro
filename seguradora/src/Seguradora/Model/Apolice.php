@@ -293,9 +293,29 @@ class Apolice
             self::SITUACAO_NAO_APROVADA=> 'Não Aprovada'
         ));
     }
-
+    /**
+     * 
+     * @return ApolicePergunta[]
+     */
     public function getApolicePerguntas() {
         return $this->apolicePerguntas;
+    }
+    /**
+     * 
+     * @return ApolicePergunta[]
+     */
+    public function getApolicePerguntaAgrupadoReport(){
+        $perguntas = Array();
+        foreach($this->getApolicePerguntas() as $apolicePergunta){
+            if($apolicePergunta->getResposta()){
+                $group = $apolicePergunta->getTipoPergunta()->getId();
+                if(!isset($perguntas[$group])){
+                    $perguntas[$group] = Array();
+                }
+                $perguntas[$group][] = $apolicePergunta;
+            }
+        }
+        return $perguntas;
     }
 
     public function setApolicePerguntas($apolicePerguntas) {

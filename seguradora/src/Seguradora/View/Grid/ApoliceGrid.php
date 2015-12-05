@@ -27,8 +27,13 @@ class ApoliceGrid extends \Faderim\Framework\View\Grid\BaseViewGrid
         $this->addAction('Relatórios Gerenciais', 'seg_report_printer');        
         $this->addActionEdit('seg_apolice');
         $this->addActionDelete('seg_apolice');
-        
         $this->addRowAction('Responder Questionário', 'seg_pergunta_answer');
+        $imprimir =$this->addRowAction('Imprimir', 'seg_apolice_printer');
+        $imprimir->setName('seg_apolice_printer');
+        
+        $this->setExtendedFromJs('Seguradora/View/Grid/Js/ApoliceGrid');
+        
+
     }
 
     protected function getPageName()

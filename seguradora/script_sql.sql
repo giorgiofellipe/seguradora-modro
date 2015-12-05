@@ -61,8 +61,14 @@ insert into faderim_router (router_name, page_name, router_title, router_control
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_add','seguradora_apolice','Incluir Apólice','Seguradora::Controller::Form::ApoliceFormController.add', null);
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_edit','seguradora_apolice','Alterar Apólice','Seguradora::Controller::Form::ApoliceFormController.edit', null);
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_delete','seguradora_apolice','Excluir Apólice','Seguradora::Controller::Form::ApoliceFormController.delete', null);
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_apolice_printer','seguradora_apolice','Imprimir Apólice','Seguradora::Controller::Form::ApoliceReportFormController.imprimir', null);
 
 
 /* QUESTIONARIO */
 
 insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_pergunta_answer','seguradora_pergunta','Responder Questionario','Seguradora::Controller::Form::PerguntaFormController.answer', null);
+
+
+/* RELATÓRIOS GERENCIAIS */
+insert into faderim_page (page_name, system_id, page_title) values ('seguradora_report','SEGURADORA','Relatórios Apólice');
+insert into faderim_router (router_name, page_name, router_title, router_controller, router_path) values ('seg_report_printer','seguradora_report','Relatórios Gerenciais','Seguradora::Controller::Form::GerencialReportFormController.imprimir', null);

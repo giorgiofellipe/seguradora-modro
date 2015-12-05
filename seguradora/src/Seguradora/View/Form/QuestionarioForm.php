@@ -51,12 +51,12 @@ class QuestionarioForm extends \Faderim\Ext\AbstractForm
         foreach ($apolicePerguntas as $apolicePergunta) {
             if ($tipoPerguntaAnterior != $apolicePergunta->getTipoPergunta()) {
                 $tipoPerguntaAnterior = $apolicePergunta->getTipoPergunta();
-                $tipoPergunta = new Field\FormField(TypeField::TYPE_TEXT, 'tipoPergunta_'.$tipoPerguntaAnterior->getId(), '', false, 13);
+                $tipoPergunta = new Field\FormField(TypeField::TYPE_TEXT, 'tipoPergunta_'.$tipoPerguntaAnterior->getId(), '', false);
                 $tipoPergunta->setModelValue($tipoPerguntaAnterior->getDescricao());
                 $tipoPergunta->setReadOnly(true);
                 $this->addChild($tipoPergunta);
             }
-            $pergunta = new Field\FormField(TypeField::TYPE_CHECKBOX, 'apolicePergunta_'.$apolicePergunta->getId(), $apolicePergunta->getDescricao(), true, 13);
+            $pergunta = new Field\FormField(TypeField::TYPE_CHECKBOX, 'apolicePergunta_'.$apolicePergunta->getId(), $apolicePergunta->getDescricao(), false, 13);
             //temos que corrigir o layout
             $pergunta->setLabelWidth(850);
             $this->addChild($pergunta);
