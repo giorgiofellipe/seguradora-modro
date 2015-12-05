@@ -32,6 +32,13 @@ class ApolicePergunta {
      * @var Pergunta
      */
     protected $pergunta;
+    
+    /**
+     * @ManyToOne(targetEntity="TipoPergunta")
+     * @JoinColumn(name="tipper_id", referencedColumnName="tipper_id", nullable=false)
+     * @var TipoPergunta
+     */
+    protected $tipoPergunta;
    
     /**
      * @Column(type="string", length=100, name="per_descricao")
@@ -55,7 +62,7 @@ class ApolicePergunta {
      * @Column(name="apoper_resposta", type="boolean", nullable=true)
      * @var boolean
      */
-    protected $reposta;
+    protected $resposta;
     
     public function getId() {
         return $this->id;
@@ -81,8 +88,8 @@ class ApolicePergunta {
         return $this->formaAplicarPorcentagem;
     }
 
-    public function getReposta() {
-        return $this->reposta;
+    public function getResposta() {
+        return $this->resposta;
     }
 
     public function setId($id) {
@@ -109,9 +116,16 @@ class ApolicePergunta {
         $this->formaAplicarPorcentagem = $formaAplicarPorcentagem;
     }
 
-    public function setReposta($reposta) {
-        $this->reposta = $reposta;
+    public function setResposta($reposta) {
+        $this->resposta = $reposta;
+    }
+    
+    public function getTipoPergunta() {
+        return $this->tipoPergunta;
     }
 
+    public function setTipoPergunta(TipoPergunta $tipoPergunta) {
+        $this->tipoPergunta = $tipoPergunta;
+    }
 
 }

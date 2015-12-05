@@ -22,8 +22,8 @@ class GerencialReportForm extends \Faderim\Ext\AbstractForm
         $reports = new Field\FormField(TypeField::TYPE_LIST, 'report', 'Relatório', true, 250);
         $reports->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Controller\Form\GerencialReportFormController::getRelatorioGerencialList());
         
-        $dataInicio = new Field\FormField(TypeField::TYPE_DATE, 'dataInicio', 'Data Início', false);
-        $dataFim = new Field\FormField(TypeField::TYPE_DATE, 'dataFim', 'Data Fim', false);        
+        $dataInicio = new Field\FormField(TypeField::TYPE_DATE, 'dataInicio', 'Período Início', false);
+        $dataFim = new Field\FormField(TypeField::TYPE_DATE, 'dataFim', 'Período Fim', false);        
         
         $situacao = new Field\FormField(TypeField::TYPE_LIST, 'situacao', 'Situação', false);        
         $situacao->getTypeField()->getLocalStore()->setEnumerator(\Seguradora\Model\Apolice::getSituacaoList());        

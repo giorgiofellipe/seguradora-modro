@@ -1,17 +1,15 @@
 ({
     listeners: {
-        afterrender: function() {
-            var tipoSeguro = this.down('[name="tipoSeguro"]');
-            tipoSeguro.on({'selectRow':{fn: this.onSelectRow, scope: this}});
-            this.down('[name="tipoSeguro/id"]').on({'blur':{fn: this.onBlurTipoSeguro, scope: this}});
-            this.onBlurTipoSeguro();
-            
+        afterrender: function() {            
+            var gravar = this.down('[text="Gravar"]');
+            gravar.setText('Imprimir');
+            gravar.removeListener();
+            gravar.setHandler(this.onClickImprimir,this);            
         }
     },    
-    onBlurTipoSeguro:function(){
-        if(!this.down('[name="tipoSeguro/id"]').getValue()){
-            this.down('[name="tipoSeguroRegiao"]').reset();
-            this.down('[name="tipoSeguroRegiao"]').hide();
+    onClickImprimir:function(){        
+        if(this.getForm().isValid()){            
+            Faderim.Util.printReport(this.routerName,this.getForm().getValues());            
         }
     }
 })

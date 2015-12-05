@@ -122,12 +122,21 @@ class Apolice
 
     /**
      * @OneToMany(targetEntity="ApolicePergunta", mappedBy="apolice", cascade={"persist", "remove", "refresh"})
+     * @OrderBy({"tipoPergunta" = "ASC"})
      * @var ApolicePergunta[]|\Doctrine\Common\Collections\ArrayCollection
      */    
     protected $apolicePerguntas;
     
+    
+    /**
+     * @Column(type="decimal",precision=10, scale=2, name="apol_valor_premio", nullable=false, options={"default":0}))
+     * @var float
+     */
+    protected $valorPremio;
+    
     public function __construct() {
         $this->apolicePerguntas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->valorPremio = 0;
     }
     
     function getId() {
@@ -285,7 +294,22 @@ class Apolice
         ));
     }
 
+    public function getApolicePerguntas() {
+        return $this->apolicePerguntas;
+    }
+
+    public function setApolicePerguntas($apolicePerguntas) {
+        $this->apolicePerguntas = $apolicePerguntas;
+    }
     
+    public function getValorPremio() {
+        return $this->valorPremio;
+    }
+
+    public function setValorPremio($valorPremio) {
+        $this->valorPremio = $valorPremio;
+    }
+
     public function newApolicePergunta() {
         $apolicePergunta = new ApolicePergunta();
         $apolicePergunta->setApolice($this);

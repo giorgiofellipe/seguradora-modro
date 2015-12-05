@@ -41,6 +41,9 @@ class ApoliceFormController extends \Faderim\Framework\Controller\BaseFormContro
             $tipoSeguroRegiao = $this->getEntityManager()->getRepository('Seguradora\Model\TipoSeguroRegiao')->find($idTipoSeguroRegiao);            
         }
         $this->getModel()->setTipoSeguroRegiao($tipoSeguroRegiao);        
+        if(!$this->getModel()->getValorPremio()){
+            $this->getModel()->setValorPremio(0);
+        }
     }
     
     protected function beanForm() {
@@ -79,11 +82,12 @@ class ApoliceFormController extends \Faderim\Framework\Controller\BaseFormContro
         foreach ($perguntas as $pergunta) {
             $apolicePergunta = $this->getModel()->newApolicePergunta();
             $apolicePergunta->setPergunta($pergunta);
+            $apolicePergunta->setTipoPergunta($pergunta->getTipoPergunta());
             $apolicePergunta->setDescricao($pergunta->getDescricao());
             $apolicePergunta->setPorcentagem($pergunta->getPorcentagem());
             $apolicePergunta->setFormaAplicarPorcentagem($pergunta->getFormaAplicarPorcentagem());
         }
         $this->getEntityManager()->persist($this->getModel());
         $this->getEntityManager()->flush();
-    }
+    }    
 }

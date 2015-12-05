@@ -130,6 +130,23 @@ Faderim.Util = function() {
             if (!msgCt) {
                 msgCt = Ext.DomHelper.insertFirst(document.body, {id: 'msg-div'}, true);
             }
+        },
+        printReport: function(routerReportName, parametros) {            
+            var frm = document.createElement('form');
+            frm.action = '?router=' + routerReportName;
+            frm.target = '_blank';
+            frm.method = 'POST';             
+            frm.name = 'frm_tmp_report_' + new Date().getTime();
+            for (var paramName in parametros) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = paramName;
+                input.value = parametros[paramName];
+                frm.appendChild(input);
+            }
+            document.body.appendChild(frm);
+            frm.submit();
+            document.body.removeChild(frm);            
         }
     };
 }();
